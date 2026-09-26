@@ -154,6 +154,10 @@
     state: present
     enabled: true
 
+- name: Refresh APT cache after adding Kubernetes repository
+  ansible.builtin.apt:
+    update_cache: true
+
 # ── Kubernetes packages ──────────────────────────────────────
 # The package suffix (-1.1, -2.1 etc.) varies by patch release.
 # Query the repo dynamically to get the exact installable version string,
@@ -219,4 +223,3 @@
     path: /home/vagrant/.bashrc
     line: "source /home/vagrant/exam-setup.sh"
     state: present
-

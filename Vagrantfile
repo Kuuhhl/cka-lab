@@ -41,6 +41,11 @@ Vagrant.configure("2") do |config|
       vb.customize ["modifyvm", :id, "--audio", "none"]
       vb.customize ["modifyvm", :id, "--usb", "off"]
     end
+
+    cp.vm.provider "vmware_desktop" do |vmware|
+      vmware.vmx["memsize"]  = "2048"
+      vmware.vmx["numvcpus"] = "2"
+    end
   end
 
   # ── Workers ───────────────────────────────────────────────────
@@ -55,6 +60,11 @@ Vagrant.configure("2") do |config|
         vb.cpus   = 1
         vb.customize ["modifyvm", :id, "--audio", "none"]
         vb.customize ["modifyvm", :id, "--usb", "off"]
+      end
+
+      w.vm.provider "vmware_desktop" do |vmware|
+        vmware.vmx["memsize"]  = "1536"
+        vmware.vmx["numvcpus"] = "1"
       end
 
       # Run Ansible once — after the LAST worker is up — targeting all hosts
